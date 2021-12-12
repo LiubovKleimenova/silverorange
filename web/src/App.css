@@ -23,6 +23,33 @@
   color: #61dafb;
 }
 
+button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  border: 2px solid #61dafb;
+  border-radius: 5px;
+}
+
+table {
+  width: 90%;
+  margin: 25px auto;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+thead tr {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: center;
+}
+
+th,
+td {
+  padding: 12px 15px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
