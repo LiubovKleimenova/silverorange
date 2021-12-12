@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Repo(props) {
   console.log(props);
   const {
@@ -12,7 +14,14 @@ export default function Repo(props) {
   return (
     <tr>
       <td>
-        {id} - {name}
+        <Link
+          to={{
+            pathname: `/repo/${id}`,
+          }}
+          state={props.repo}
+        >
+          {name}
+        </Link>
       </td>
       <td>{description}</td>
       <td>{forks_count}</td>

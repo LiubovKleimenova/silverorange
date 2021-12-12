@@ -45,6 +45,10 @@ thead tr {
   text-align: center;
 }
 
+tbody tr:nth-of-type(even) {
+  color: #009879;
+}
+
 th,
 td {
   padding: 12px 15px;
