@@ -23,6 +23,18 @@
   color: #61dafb;
 }
 
+.border-top {
+  border-top: 1px solid #bebebe;
+}
+
+.commit {
+  width: 60%;
+  margin: 20px auto;
+  border: 1px solid #bebebe;
+  background-color: #ececec;
+  border-radius: 5px;
+}
+
 button {
   margin: 0 10px;
   padding: 10px 20px;
@@ -45,7 +57,7 @@ thead tr {
   text-align: center;
 }
 
-tbody tr:nth-of-type(even) {
+a {
   color: #009879;
 }
 

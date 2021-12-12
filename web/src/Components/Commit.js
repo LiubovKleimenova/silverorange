@@ -3,10 +3,21 @@ export default function Commit(props) {
     return <h3>{props.error}</h3>;
   } else if (props.lastCommit) {
     return (
-      <div>
-        <h2>Last commit date: {props.lastCommit.commit.committer.date}</h2>
-        <h2>Last commit message: {props.lastCommit.commit.message}</h2>
-        <h2>Last commit author: {props.lastCommit.commit.author.name}</h2>
+      <div className="border-top">
+        <div className="d-flex">
+          <p>Last commit date:</p>
+          <h3>{props.lastCommit.commit.committer.date.slice(0, 10)}</h3>
+        </div>
+        <div className="d-flex">
+          <p>
+            Last commit message:
+            <pre className="commit">{props.lastCommit.commit.message}</pre>
+          </p>
+        </div>
+        <div className="d-flex">
+          <p>Last commit author:</p>
+          <h3>{props.lastCommit.commit.author.name}</h3>
+        </div>
       </div>
     );
   } else {

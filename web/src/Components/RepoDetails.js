@@ -14,7 +14,7 @@ export default function RepoDetails() {
   let commitsUrl;
 
   if (repo.commits_url) {
-    commitsUrl = `https://api.github.com/repos/silverorange/${repo.full_name}/git/commits`;
+    commitsUrl = repo.commits_url.slice(0, -6);
   }
 
   useEffect(() => {

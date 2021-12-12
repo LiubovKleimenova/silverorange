@@ -5,7 +5,7 @@ export default function Readme(props) {
     return <h3>{props.error}</h3>;
   } else if (props.readme) {
     return (
-      <div>
+      <div className="border-top">
         <h3>Readme.md:</h3>
         <ReactMarkdown children={props.readme} />
       </div>
