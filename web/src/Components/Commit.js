@@ -9,10 +9,10 @@ export default function Commit(props) {
           <h3>{props.lastCommit.commit.committer.date.slice(0, 10)}</h3>
         </div>
         <div className="d-flex">
-          <p>
+          <div>
             Last commit message:
             <pre className="commit">{props.lastCommit.commit.message}</pre>
-          </p>
+          </div>
         </div>
         <div className="d-flex">
           <p>Last commit author:</p>

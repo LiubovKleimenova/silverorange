@@ -28,12 +28,6 @@ export default function RepoDetails() {
         .then((data) => setReadme(data))
         .catch((err) => {
           setErrorReadme('Error fetching Readme data from server');
-          return new Response(
-            JSON.stringify({
-              status: 400,
-              message: 'Error fetching Readme data from server',
-            })
-          );
         });
     }
     requestReadme();
@@ -55,19 +49,11 @@ export default function RepoDetails() {
           })
           .catch((err) => {
             setErrorCommit('Error fetching Commit data from server');
-            return new Response(
-              JSON.stringify({
-                status: 400,
-                message: 'Error fetching Commit data from server',
-              })
-            );
           });
       }
     }
     requestReadme();
   }, [commitsUrl]);
-
-  // if ()
 
   return (
     <div>

@@ -12,17 +12,6 @@ export default function Repos() {
     requestData();
   }, []);
 
-  // const handleError = function (err) {
-  //   console.warn(err);
-  //   setError('Error fetching data from server. Please try again');
-  //   return new Response(
-  //     JSON.stringify({
-  //       code: 400,
-  //       message: 'Error fetching data from server. Please try again',
-  //     })
-  //   );
-  // };
-
   async function requestData() {
     await fetch('http://localhost:4000/repos')
       .then((res) => res.json())
@@ -50,12 +39,6 @@ export default function Repos() {
       })
       .catch((err) => {
         setError('Error fetching data from server. Please try again');
-        return new Response(
-          JSON.stringify({
-            status: 400,
-            message: 'Error fetching data from server. Please try again',
-          })
-        );
       });
   }
 
