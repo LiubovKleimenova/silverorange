@@ -4,39 +4,73 @@ import Button from './Button';
 
 export default function Repos() {
   const [repos, setPepos] = useState([]);
-  const [error, setError] = useState('');
+  const [filteredRepos, setfilteredRepos] = useState([]);
   const [languages, setLanguages] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     requestData();
   }, []);
 
-  async function requestData() {
-    const res = await fetch('http://localhost:4000/repos');
+  // const handleError = function (err) {
+  //   console.warn(err);
+  //   setError('Error fetching data from server. Please try again');
+  //   return new Response(
+  //     JSON.stringify({
+  //       code: 400,
+  //       message: 'Error fetching data from server. Please try again',
+  //     })
+  //   );
+  // };
 
-    if (!res || res.status !== 200) {
+  async function requestData() {
+    const res = await fetch('http://localhost:4000/repos').catch((err) => {
       setError('Error fetching data from server. Please try again');
-    } else {
-      const data = await res.json();
+      return new Response(
+        JSON.stringify({
+          status: 400,
+          message: 'Error fetching data from server. Please try again',
+        })
+      );
+    });
+
+    // if (res.status !== 200) {
+    //   console.log(res);
+    //   return Promise.reject(res);
+    //   //setError('Error fetching data from server. Please try again');
+    //} else {
+    console.log(res);
+    const data = await res.json();
+
+    if (data.length) {
+      // sort by creation date
       const reposList = data.sort((a, b) => {
         return (
           new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         );
       });
 
-      console.log(reposList);
-
+      // get languages from repos list
       const languagesList = data
         .map((repo) => repo.language)
         .filter((value, index, self) => self.indexOf(value) === index);
 
       setPepos(reposList);
+
+      setfilteredRepos(reposList);
       setLanguages(languagesList);
     }
+
+    //}
   }
 
   const selectLanguage = (e) => {
-    console.log(e.target.value);
+    if (e.target.value === 'All') {
+      setfilteredRepos(repos);
+      return;
+    }
+    const filtered = repos.filter((repo) => repo.language === e.target.value);
+    setfilteredRepos(filtered);
   };
 
   if (error) {
@@ -64,7 +98,7 @@ export default function Repos() {
             </tr>
           </thead>
           <tbody>
-            {repos.map((repo) => (
+            {filteredRepos.map((repo) => (
               <Repo key={repo.id} repo={repo} />
             ))}
           </tbody>
