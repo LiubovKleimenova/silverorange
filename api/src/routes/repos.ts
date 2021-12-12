@@ -14,20 +14,17 @@ repos.get('/', async (_: Request, res: Response) => {
     path.resolve(__dirname, '../../../api/data/repos.json')
   );
 
-  // const fetchDataFromUrl = axios.get(
-  //   'https://api.github.com/users/silverorange/repos'
-  // );
+  const fetchDataFromUrl = axios.get(
+    'https://api.github.com/users/silverorange/repos'
+  );
 
-  let repos = await Promise.all([fetchDataFromFile])
-    //let repos = await Promise.all([fetchDataFromFile, fetchDataFromUrl])
+  let repos = await Promise.all([fetchDataFromFile, fetchDataFromUrl])
     .then((data) => {
       let res1 = JSON.parse(data[0].toString());
-      //let res2 = data[1].data;
-      //let res2 = [];
+      let res2 = data[1].data;
 
       // Only return repositories where repository.fork is false
-      //return res1.concat(res2).filter((repo: any) => repo.fork === false);
-      return res1.filter((repo: any) => repo.fork === false);
+      return res1.concat(res2).filter((repo: any) => repo.fork === false);
     })
     .catch((err) => {
       console.log(err);
