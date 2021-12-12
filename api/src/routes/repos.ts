@@ -8,22 +8,26 @@ export const repos = Router();
 repos.get('/', async (_: Request, res: Response) => {
   res.header('Cache-Control', 'no-store');
   res.header('Content-Type', 'application/json');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
 
   const fetchDataFromFile = fs.promises.readFile(
     path.resolve(__dirname, '../../../api/data/repos.json')
   );
 
-  const fetchDataFromUrl = axios.get(
-    'https://api.github.com/users/silverorange/repos'
-  );
+  // const fetchDataFromUrl = axios.get(
+  //   'https://api.github.com/users/silverorange/repos'
+  // );
 
-  let repos = await Promise.all([fetchDataFromFile, fetchDataFromUrl])
+  let repos = await Promise.all([fetchDataFromFile])
+    //let repos = await Promise.all([fetchDataFromFile, fetchDataFromUrl])
     .then((data) => {
       let res1 = JSON.parse(data[0].toString());
-      let res2 = data[1].data;
+      //let res2 = data[1].data;
+      //let res2 = [];
 
       // Only return repositories where repository.fork is false
-      return res1.concat(res2).filter((repo: any) => repo.fork === false);
+      //return res1.concat(res2).filter((repo: any) => repo.fork === false);
+      return res1.filter((repo: any) => repo.fork === false);
     })
     .catch((err) => {
       console.log(err);
